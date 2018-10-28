@@ -14,7 +14,7 @@ function refreshLoop () {
 		times.push(now);
 		fps.textContent = `${times.length} FPS`;
 		refreshLoop();
-	}, 10);
+	}, 20);
 }
 
 refreshLoop();

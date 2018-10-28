@@ -8,6 +8,7 @@ export default class State {
 			y: 0,
 			damage: 0
 		};
+		this.maxUnits = 0;
 	}
 
 	addBarrier (x, y, w, h) {
@@ -27,4 +28,6 @@ export default class State {
 			x, y, damage: 0
 		};
 	}
+
+
 }
