@@ -6,20 +6,31 @@ import (
 )
 
 var (
-	ctx js.Value
-    done = make(chan struct{})
+	no             int
+	beforeUnloadCh = make(chan struct{})
 )
 
 func main() {
 	callback := js.NewCallback(printMessage)
-	defer callback.Release() // To defer the callback releasing is a good practice
+	defer callback.Release()
 	setPrintMessage := js.Global().Get("setPrintMessage")
 	setPrintMessage.Invoke(callback)
-	<-done
+
+	beforeUnloadCb := js.NewEventCallback(0, beforeUnload)
+	defer beforeUnloadCb.Release()
+	addEventListener := js.Global().Get("addEventListener")
+	addEventListener.Invoke("beforeunload", beforeUnloadCb)
+
+	<-beforeUnloadCh
+	fmt.Println("Bye Wasm !")
 }
 
 func printMessage(args []js.Value) {
 	message := args[0].String()
-	fmt.Println(message)
-	done <- struct{}{} // Notify printMessage has been called
+	no++
+	fmt.Printf("Message no %d: %s\n", no, message)
+}
+
+func beforeUnload(event js.Value) {
+	beforeUnloadCh <- struct{}{}
 }

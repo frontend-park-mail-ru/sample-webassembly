@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+	<link rel="shortcut icon" type="image/x-icon" href="//img.imgsmail.ru/r/favicon/favicon.ico"/>
+	<title>WebAssembly sample</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&amp;subset=cyrillic"
+		  rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,500,500i&amp;subset=cyrillic"
+		  rel="stylesheet">
+	<link rel="stylesheet" href="/normalize.css">
+	<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<script src="/js/utils/wasm_exec.js"></script>
+<script>
+	window.GAME_MODE = 'go';
+
+	if (!WebAssembly.instantiateStreaming) { // polyfill
+		WebAssembly.instantiateStreaming = async (resp, importObject) => {
+			const source = await (await resp).arrayBuffer();
+			return await WebAssembly.instantiate(source, importObject);
+		};
+	}
+	let run;
+
+	(async function() {
+		const go = new Go();
+		const { instance } = await WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject);
+		run = go.run(instance)
+	})();
+
+	let printMessage;
+	function setPrintMessage(callback) {
+		printMessage = callback;
+		document.querySelector('#printMessageButton').disabled = false
+	}
+</script>
+
+<input id="messageInput" type="text" value="Hello Wasm!">
+<button onClick="printMessage(document.querySelector('#messageInput').value)" id="printMessageButton" disabled>Print message</button>
+
+
+<script type="module" src="/js/fps-counter.js"></script>
+<script type="module" src="/js/game/init.js"></script>
+<script src="/reload/reload.js"></script>
+</body>
+</html>
