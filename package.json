@@ -1,0 +1,23 @@
+{
+  "name": "sample-webassembly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "reload -b -d public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/sample-webassembly.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/sample-webassembly/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/sample-webassembly#readme",
+  "devDependencies": {
+    "reload": "^2.3.1"
+  }
+}
