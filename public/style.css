@@ -1,0 +1,31 @@
+html, body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+}
+
+pre,
+code,
+kbd,
+samp {
+	font-family: 'Roboto Mono', monospace;
+}
+
+#fps {
+	position: fixed;
+	top: 0;
+	right: 0;
+	font-size: 20px;
+	padding: 2px 6px;
+}
+
+
+#canvas {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 600px;
+	height: 600px;
+	margin: -300px auto auto -300px;
+	border: 1px solid lightgray;
+}
