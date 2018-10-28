@@ -1,8 +1,10 @@
+import Bus from '../bus.js';
+import { START_GAME, STATE_CHANGED } from './events.js';
 import Scene from './scene.js';
 import State from './state.js';
 
 
-export default class BaseGame {
+export default class BaseGame extends Bus {
 	/**
 	 * @param {'js' | 'golang' | 'wasm'} mode
 	 * @param {CanvasRenderingContext2D} ctx
@@ -11,6 +13,7 @@ export default class BaseGame {
 	 */
 
 	constructor (mode, {ctx, width, height}) {
+		super();
 		this.mode = mode;
 		this.state = new State;
 
@@ -29,9 +32,20 @@ export default class BaseGame {
 		);
 	}
 
-	start () {
+	initGame () {
 		this.initState();
 		this.scene.setState(this.state);
+
+		this.on(STATE_CHANGED, function (state) {
+			this.state = state;
+			this.scene.setState(this.state);
+		}.bind(this));
+	}
+
+	start () {
+		this.initGame();
 		this.scene.start();
+
+		this.emit(START_GAME);
 	}
 }

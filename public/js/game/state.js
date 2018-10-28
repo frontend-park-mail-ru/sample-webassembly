@@ -1,5 +1,5 @@
 export default class State {
-	constructor () {
+	constructor (state = {}) {
 		this.units = [];
 		this.barriers = [];
 		this.rawbarriers = [];
@@ -9,6 +9,15 @@ export default class State {
 			damage: 0
 		};
 		this.maxUnits = 0;
+		this.spawnPoints = [];
+
+		Object.assign(this, state);
+	}
+
+	addSpawn (x, y) {
+		this.spawnPoints.push({
+			x, y
+		});
 	}
 
 	addBarrier (x, y, w, h) {

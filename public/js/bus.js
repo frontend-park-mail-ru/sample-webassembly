@@ -1,7 +1,7 @@
 /**
  * @module Bus
  */
-export default new class Bus {
+export default class Bus {
 	constructor () {
 		this.listeners = {};
 	}
