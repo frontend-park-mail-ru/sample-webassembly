@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build-wasm && npm run server",
+    "start": "npm run server",
     "server": "./node_modules/.bin/supervisor -k -e html -i .git/,node_modules/ -- server.js",
     "build-wasm": "GOOS=js GOARCH=wasm go build -o ./public/game-go/main.wasm ./go"
   },
