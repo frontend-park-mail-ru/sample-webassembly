@@ -30,6 +30,9 @@ export default class BaseGame extends Bus {
 		state.setTarget(
 			300, 300
 		);
+
+		state.width = this.width;
+		state.height = this.height;
 	}
 
 	initGame () {

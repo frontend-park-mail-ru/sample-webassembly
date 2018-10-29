@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run server",
     "server": "./node_modules/.bin/supervisor -k -e html -i .git/,node_modules/ -- server.js",
-    "build-wasm": "GOOS=js GOARCH=wasm go build -o ./public/game-go/main.wasm ./go"
+    "build-wasm": "GOOS=js GOARCH=wasm go build -o ./public/game-go/main.wasm ./go",
+    "ngraph": "webpack --entry ./test/entry.js --output ./public/js/vendor/ngraph.js --mode=development"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,11 @@
     "morgan": "^1.9.1",
     "reload": "^2.3.1",
     "supervisor": "^0.12.0"
+  },
+  "dependencies": {
+    "ngraph.graph": "0.0.14",
+    "ngraph.path": "^1.0.2",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2"
   }
 }

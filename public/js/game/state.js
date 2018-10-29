@@ -10,6 +10,8 @@ export default class State {
 		};
 		this.maxUnits = 0;
 		this.spawnPoints = [];
+		this.width = 0;
+		this.height = 0;
 
 		Object.assign(this, state);
 	}

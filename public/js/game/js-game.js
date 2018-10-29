@@ -9,6 +9,11 @@ export default class JsGame extends BaseGame {
 		super.initState();
 		const state = this.state;
 
+		state.units.push({
+			x: 10,
+			y: 10
+		});
+
 		state.addBarrier(100, 100, 20, 100);
 		state.addBarrier(480, 400, 20, 100);
 		state.addBarrier(400, 100, 100, 20);
@@ -27,7 +32,9 @@ export default class JsGame extends BaseGame {
 			barriers: state.barriers,
 			target: state.target,
 			maxUnits: state.maxUnits,
-			spawnPoints: state.spawnPoints
+			spawnPoints: state.spawnPoints,
+			width: state.width,
+			height: state.height
 		};
 
 		const outputState = next(inputState);
@@ -43,10 +50,12 @@ export default class JsGame extends BaseGame {
 
 		const loop = this.loopIteration.bind(this);
 
-		this.on(START_GAME, function () {
-			setInterval(function () {
-				loop();
-			}, 1000);
-		});
+		// this.on(START_GAME, function () {
+		// 	setInterval(function () {
+		// 		loop();
+		// 	}, 10000);
+		// });
+
+		loop();
 	}
 }
